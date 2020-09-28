@@ -24,6 +24,11 @@ class RatingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        btnrtgmSummary.setOnClickListener {
+            navigateToSummary()
+        }
+
         showRandomAssessableGame()
     }
 
@@ -32,5 +37,14 @@ class RatingFragment : Fragment() {
             "Shadow of the Tombraider").random()
 
         tvrtgmRandomGame.text = randomGame
+    }
+
+    private fun navigateToSummary() {
+
+        val args = Bundle()
+        args.putFloat(ARG_GAME_RATING, rbGameRating.rating)
+        args.putString(ARG_GAME_NAME, tvrtgmRandomGame.text.toString())
+
+        findNavController().navigate(R.id.action_ratingFragment_to_summaryFragment, args)
     }
 }
